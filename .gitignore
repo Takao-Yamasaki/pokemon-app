@@ -1,0 +1,23 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+pokemon-app/node_modules
+pokemon-app/.pnp
+pokemon-app/.pnp.js
+
+# testing
+pokemon-app/coverage
+
+# production
+pokemon-app/build
+
+# misc
+pokemon-app/.DS_Store
+pokemon-app/.env.local
+pokemon-app/.env.development.local
+pokemon-app/.env.test.local
+pokemon-app/.env.production.local
+
+pokemon-app/npm-debug.log*
+pokemon-app/yarn-debug.log*
+pokemon-app/yarn-error.log*
