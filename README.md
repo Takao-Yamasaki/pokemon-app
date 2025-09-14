@@ -59,3 +59,4 @@ make rebuild
 
 ## 参考
 - [Start a New React Project](https://18.react.dev/learn/start-a-new-react-project)
+- [Devcontainer で Claude Code を使う時はfeatures でインストール出来る](https://qiita.com/fussy113/items/eba52ac807c060dce379)
