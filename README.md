@@ -1,5 +1,5 @@
 # pokemon-app
-- Reactで実装したポケモン図鑑のリポジトリです。
+[PokeAPI](https://pokeapi.co/)を使ってReactで実装したポケモン図鑑のリポジトリです。
 
 ## プロジェクトの新規作成方法
 - appコンテナを起動
