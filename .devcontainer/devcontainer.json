@@ -1,0 +1,20 @@
+{
+  "name": "pokemon-app",
+  "dockerComposeFile": [
+    "../compose.yaml"
+  ],
+  "service": "app",
+  "workspaceFolder": "/pokemon-app",
+  "features": {
+    "ghcr.io/anthropics/devcontainer-features/claude-code:1.0": {}
+  },
+  "dev.containers.defaultExtensions": [
+    "dsznajder.es7-react-js-snippets",
+    "formulahendry.auto-rename-tag",
+    "formulahendry.auto-close-tag",
+    "MS-CEINTL.vscode-language-pack-ja",
+    "pkief.material-icon-theme",
+    "esbenp.prettier-vscode",
+    "anthropic.claude-code"
+  ]
+}
