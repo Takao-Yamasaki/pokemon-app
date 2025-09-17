@@ -1,3 +1,4 @@
+// 全てのポケモンデータを取得する関数
 export const getAllPokemon = (url) => {
   return new Promise((resolve, reject) => {
     // URLからポケモンのデータを取得開始
@@ -10,4 +11,16 @@ export const getAllPokemon = (url) => {
       // resolve()を呼ぶことで、このPromiseが成功したことを伝え、JSON形式のデータを返す
       .then((data) => resolve(data));
   });
+};
+
+// 詳細なポケモンデータを取得する関数
+export const getPokemon = (url) => {
+    return new Promise((resolve, reject) => {
+      fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          resolve(data);
+        });
+    })
 };

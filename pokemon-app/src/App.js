@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import { getAllPokemon } from "./utils/pokemon";
+import { getAllPokemon, getPokemon } from "./utils/pokemon";
 
 function App() {
   const initialURL = "https://pokeapi.co/api/v2/pokemon";
   // 最初からポケモンのデータを取得するため、loadingする前提
   const [loading, setLoading] = useState(true);
+  const [pokemonData, setPokemonData] = useState([]);
 
   // 一回だけ呼び出したいので、第二引数は[]で指定する
   useEffect(() => {
@@ -13,13 +14,27 @@ function App() {
     const fetchPokemonData = async () => {
       // 全てのポケモンデータを取得
       let res = await getAllPokemon(initialURL);
-      console.log(res);
+      // 各ポケモンの詳細なデータを取得
+      loadPokemon(res.results);
       // データを取得できたので、ローディングはしない
       setLoading(false);
     };
     // fetchPokemonDataを呼び出す
     fetchPokemonData();
   }, []);
+
+  const loadPokemon = async (data) => {
+    // 20種類のデータフェッチが終わるまで
+    let _pokemonData = await Promise.all(
+      data.map((pokemon) => {
+        let pokemonRecord = getPokemon(pokemon.url);
+        return pokemonRecord;
+      })
+    );
+    setPokemonData(_pokemonData);
+  };
+
+  console.log(pokemonData);
 
   return <div className="App">
     {loading ? (
