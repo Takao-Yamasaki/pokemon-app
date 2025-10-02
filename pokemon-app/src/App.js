@@ -10,6 +10,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [pokemonData, setPokemonData] = useState([]);
   const [nextURL, setNextURL] = useState("");
+  const [prevURL, setPrevURL] = useState("");
 
   // 一回だけ呼び出したいので、第二引数は[]で指定する
   useEffect(() => {
@@ -20,7 +21,7 @@ function App() {
       // 各ポケモンの詳細なデータを取得
       loadPokemon(res.results);
       // getALLPokemonで取得した内容を出力
-      console.log(res);
+      // console.log(res);
       // 次ページのURLをセットする
       setNextURL(res.next);
       // データを取得できたので、ローディングはしない
@@ -54,11 +55,29 @@ function App() {
     await loadPokemon(data.results);
     // 次ページのURLをセットする
     setNextURL(data.next);
+    // 前ページのURLをセットする
+    setPrevURL(data.previous);
     // データを取得できたので、ローディングはしない
     setLoading(false);
   };
 
-  const handlePrevPage = () => {};
+  // 前ページをデータ読み込む関数
+  const handlePrevPage = async () => {
+    // 前のページがなければ、何もしない
+    if(!prevURL) return;
+    // ページの読み込み
+    setLoading(true);
+    // 各ポケモンの詳細なデータを取得
+    let data = await getAllPokemon(prevURL);
+    // 各ポケモンの詳細なデータを種畜
+    await loadPokemon(data.results);
+    // 次ページのURLをセットする
+    setNextURL(data.next);
+    // 前ページのURLをセットする
+    setPrevURL(data.previous);
+    // データを取得できたので、ローディングはしない
+    setLoading(false);
+  };
 
   return (
     <>
