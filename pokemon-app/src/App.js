@@ -43,6 +43,7 @@ function App() {
 
   // console.log(pokemonData);
   
+  // 次ページをデータ読み込む関数
   const handleNextPage = async () => {
     // ページの読み込み
     setLoading(true);
@@ -51,10 +52,12 @@ function App() {
     // console.log(data);
     // 各ポケモンの詳細なデータを取得
     await loadPokemon(data.results);
+    // 次ページのURLをセットする
+    setNextURL(data.next);
     // データを取得できたので、ローディングはしない
     setLoading(false);
   };
-  
+
   const handlePrevPage = () => {};
 
   return (
