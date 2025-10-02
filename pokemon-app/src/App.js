@@ -9,6 +9,7 @@ function App() {
   // 最初からポケモンのデータを取得するため、loadingする前提
   const [loading, setLoading] = useState(true);
   const [pokemonData, setPokemonData] = useState([]);
+  const [nextURL, setNextURL] = useState("");
 
   // 一回だけ呼び出したいので、第二引数は[]で指定する
   useEffect(() => {
@@ -18,6 +19,10 @@ function App() {
       let res = await getAllPokemon(initialURL);
       // 各ポケモンの詳細なデータを取得
       loadPokemon(res.results);
+      // getALLPokemonで取得した内容を出力
+      console.log(res);
+      // 次ページのURLをセットする
+      setNextURL(res.next);
       // データを取得できたので、ローディングはしない
       setLoading(false);
     };
@@ -36,7 +41,21 @@ function App() {
     setPokemonData(_pokemonData);
   };
 
-  console.log(pokemonData);
+  // console.log(pokemonData);
+  
+  const handleNextPage = async () => {
+    // ページの読み込み
+    setLoading(true);
+    // 各ポケモンの詳細なデータを取得
+    let data = await getAllPokemon(nextURL);
+    // console.log(data);
+    // 各ポケモンの詳細なデータを取得
+    await loadPokemon(data.results);
+    // データを取得できたので、ローディングはしない
+    setLoading(false);
+  };
+  
+  const handlePrevPage = () => {};
 
   return (
     <>
@@ -50,6 +69,10 @@ function App() {
               {pokemonData.map((pokemon, i)=>{
                 return <Card key={i} pokemon={pokemon} /> ;
               })}
+            </div>
+            <div className="btn">
+              <button onClick={handlePrevPage}>前へ</button>
+              <button onClick={handleNextPage}>次へ</button>
             </div>
           </>
         )}
